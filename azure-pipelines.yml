@@ -9,7 +9,17 @@ trigger:
 pool:
   vmImage: windows-latest
 
+
 steps:
-- task: VSBuild@1
+- task: SqlAzureDacpacDeployment@1
   inputs:
-    solution: '**\*.sql'
+    azureSubscription: 'ADO-DB-SC'
+    AuthenticationType: 'server'
+    ServerName: 'mhk-db-server.database.windows.net'
+    DatabaseName: 'mhk-db'
+    SqlUsername: 'testuser'
+    SqlPassword: 'Password1234!'
+    deployType: 'SqlTask'
+    SqlFile: 'https://github.com/HussaanKhalid/sql-queries/blob/main/sql-test-query.sql'
+    IpDetectionMethod: 'AutoDetect'
+
